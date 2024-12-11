@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,16 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'join_ui';
+  isMobileView: boolean = false;
+
+  private breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
+
+  constructor() {
+    this.breakpointObserver
+      .observe([Breakpoints.Handset])
+      .subscribe((result) => {
+        this.isMobileView = result.matches;
+        console.log('Is mobile view:', this.isMobileView);
+      });
+  }
 }
