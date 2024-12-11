@@ -1,0 +1,12 @@
+<nav
+  class="bg-primary"
+  [ngClass]="{ 'nav-mobile': breakpointService.isMobileView }"
+>
+  <div class="d-flex justify-content-center">
+    <img src="/JoinLogo.png" alt="JoinLogo" />
+  </div>
+  <ul>
+    <li><a routerLink="/login">Login</a></li>
+    <li><a routerLink="/signup">Register</a></li>
+  </ul>
+</nav>
