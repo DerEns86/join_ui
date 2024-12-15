@@ -1,0 +1,24 @@
+<header [ngClass]="{ 'header-mobile': breakpointService.isMobileView }">
+  <div class="content d-flex justify-content-between align-items-center shadow">
+    @if (breakpointService.isMobileView) {
+    <div class="logo">
+      <img src="/JoinLogoDark.png" alt="Join Logo Dark" />
+    </div>
+    } @if (!breakpointService.isMobileView){
+    <div>
+      <h5>Kanban Project Management Tool</h5>
+    </div>
+    }
+    <div class="actions d-flex gap-2 align-items-center">
+      <span><i class="bi bi-question-circle icon-help"></i></span>
+      <div ngbDropdown class="d-inline-block" style="cursor: pointer">
+        <span class="icon-name" id="dropdown" ngbDropdownToggle>{{
+          setUserInitials()
+        }}</span>
+        <div ngbDropdownMenu aria-labelledby="dropdown" class="bg-primary">
+          <div (click)="onLogout()" ngbDropdownItem>Logout</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

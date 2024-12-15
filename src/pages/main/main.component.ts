@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../app/services/auth.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
 })

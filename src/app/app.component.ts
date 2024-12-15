@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,12 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'join_ui';
+
+  private authService = inject(AuthService);
+
+  ngOnInit(): void {
+    console.log(this.authService.currentUserSignal());
+  }
 }
