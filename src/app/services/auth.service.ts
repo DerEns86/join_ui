@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
 export class AuthService {
   private http = inject(HttpClient);
   private router: Router = inject(Router);
-  constructor() {}
 
   currentUserSignal = signal<UserLoginInterface | null | undefined>(null);
+  constructor() {}
 
   login(username: string, password: string): Observable<UserLoginInterface> {
     return this.http.post<UserLoginInterface>(
@@ -24,13 +24,17 @@ export class AuthService {
     );
   }
 
-  setCurrentUser(data: UserLoginInterface) {
-    const newUser = {
-      username: data.username,
-      roles: data.roles,
-      jwtToken: data.jwtToken,
-    };
-    this.currentUserSignal.set(newUser);
+  fetchCurrentUser(): Observable<UserLoginInterface> {
+    const token = window.localStorage.getItem('token');
+
+    return this.http.get<UserLoginInterface>(
+      'http://localhost:8080/api/auth/user',
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
   }
 
   logout() {

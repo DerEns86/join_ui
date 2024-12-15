@@ -13,9 +13,5 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit {
   title = 'join_ui';
 
-  private authService = inject(AuthService);
-
-  ngOnInit(): void {
-    console.log(this.authService.currentUserSignal());
-  }
+  ngOnInit(): void {}
 }

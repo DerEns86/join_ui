@@ -33,13 +33,11 @@ export class LoginComponent implements OnInit {
       this.authService
         .login(this.loginForm.value.username, this.loginForm.value.password)
         .subscribe({
-          next: (data: any) => {
-            console.log(data);
-            console.log('token: ' + data.jwtToken);
+          next: (data: UserLoginInterface) => {
             window.localStorage.setItem('token', data['jwtToken']);
             window.localStorage.setItem('user', JSON.stringify(data));
 
-            this.authService.setCurrentUser(data);
+            this.authService.currentUserSignal.set(data);
             console.log(this.authService.currentUserSignal());
             this.router.navigateByUrl('');
           },
