@@ -8,12 +8,12 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../app/services/auth.service';
 import { UserLoginInterface } from '../../app/models/UserLogin.interface';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })

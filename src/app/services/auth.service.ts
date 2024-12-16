@@ -14,6 +14,22 @@ export class AuthService {
   currentUserSignal = signal<UserLoginInterface | null | undefined>(null);
   constructor() {}
 
+  resgister(
+    username: string,
+    email: string,
+    password: string
+  ): Observable<string> {
+    return this.http.post<string>(
+      'http://localhost:8080/api/auth/public/signup',
+      {
+        username: username,
+        email: email,
+        password: password,
+        role: ['user'],
+      }
+    );
+  }
+
   login(username: string, password: string): Observable<UserLoginInterface> {
     return this.http.post<UserLoginInterface>(
       'http://localhost:8080/api/auth/public/signin',
