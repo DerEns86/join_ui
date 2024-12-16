@@ -22,6 +22,8 @@ export class LoginComponent implements OnInit {
   private authService = inject(AuthService);
   private router: Router = inject(Router);
 
+  errorMessages: string = '';
+
   loginForm: FormGroup = this.fb.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
@@ -43,6 +45,7 @@ export class LoginComponent implements OnInit {
           },
           error: (err) => {
             console.error('Login failes', err.error.message);
+            this.errorMessages = err.error.message;
             window.localStorage.removeItem('token');
             window.localStorage.setItem('user', JSON.stringify(null));
             this.authService.currentUserSignal.set(null);

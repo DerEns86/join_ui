@@ -8,24 +8,51 @@
         <div class="card-body">
           <h5 class="card-title">Login</h5>
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
+            <div class="form-group mt-3">
               <label for="username">Username</label>
               <input
                 type="text"
                 class="form-control"
                 id="username"
                 formControlName="username"
+                required
+                placeholder="Enter username"
+                [class.is-invalid]="
+                  loginForm.get('username')?.invalid &&
+                  loginForm.get('username')?.touched
+                "
+                [class.is-valid]="
+                  loginForm.get('username')?.valid &&
+                  loginForm.get('username')?.touched
+                "
               />
+              <div class="invalid-feedback">Please enter a valid username.</div>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-3 mb-3">
               <label for="password">Password</label>
               <input
                 type="password"
                 class="form-control"
                 id="password"
                 formControlName="password"
+                required
+                placeholder="Enter password"
+                [class.is-invalid]="
+                  loginForm.get('password')?.invalid &&
+                  loginForm.get('password')?.touched
+                "
+                [class.is-valid]="
+                  loginForm.get('password')?.valid &&
+                  loginForm.get('password')?.touched
+                "
               />
+              <div class="invalid-feedback">Please enter a valid password.</div>
             </div>
+            @if(errorMessages){
+            <div class="alert alert-danger mt-3" role="alert">
+              {{ errorMessages }}
+            </div>
+            }
             <button type="submit" class="btn btn-primary">Login</button>
           </form>
         </div>
