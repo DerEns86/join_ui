@@ -1,0 +1,35 @@
+<p>add-task works!</p>
+
+<form [formGroup]="addTaskForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" formControlName="name" />
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input
+      type="text"
+      class="form-control"
+      id="description"
+      formControlName="description"
+    />
+  </div>
+  <div class="form-group">
+    <label for="priority">Priority</label>
+    <select class="form-control" id="priority" formControlName="priority">
+      <option value="LOW">LOW</option>
+      <option value="MEDIUM">MEDIUM</option>
+      <option value="URGENT">URGENT</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="dueDate">Due Date</label>
+    <input
+      type="date"
+      class="form-control"
+      id="dueDate"
+      formControlName="dueDate"
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
