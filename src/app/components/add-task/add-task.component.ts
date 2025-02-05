@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import {
+  FormArray,
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
@@ -30,10 +31,28 @@ export class AddTaskComponent {
     description: ['', Validators.required],
     priority: ['MEDIUM'],
     dueDate: ['', Validators.required],
+    subtasks: this.fb.array([]),
   });
 
   onSubmit() {
-    console.log(this.addTaskForm.value);
-    this.taskService.addTask(this.addTaskForm.value);
+    const { subtasks, ...taskData } = this.addTaskForm.value;
+    this.taskService.addTaskWithSubtasks(taskData, subtasks);
+  }
+
+  get subtasks(): FormArray {
+    return this.addTaskForm.get('subtasks') as FormArray;
+  }
+
+  addSubtask() {
+    this.subtasks.push(
+      this.fb.group({
+        name: ['', Validators.required],
+        isCompleted: [false],
+      })
+    );
+  }
+
+  removeSubtask(index: number) {
+    this.subtasks.removeAt(index);
   }
 }
