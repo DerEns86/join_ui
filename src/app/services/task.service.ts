@@ -14,6 +14,7 @@ export class TaskService {
     this.http.post(`${this.BASE_URL}api/tasks`, task).subscribe({
       next: (data) => {
         console.log(data);
+        console.log('TaskId:', data);
       },
       error: (err) => {
         console.error(err);
