@@ -1,7 +1,7 @@
 import { ContactInterface } from './contact.interface';
-import { Priority } from './enums/Priority.enum';
-import { Status } from './enums/Status.enum';
-import { UpdateMessage } from './enums/UpdateMessage.enum';
+import { Priority } from './enums/priority.enum';
+import { Status } from './enums/status.enum';
+import { UpdateMessage } from './enums/updateMessage.enum';
 import { SubtaskInterface } from './subtask.interface';
 
 export interface TaskInterface {

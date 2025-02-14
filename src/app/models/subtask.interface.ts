@@ -1,4 +1,4 @@
-import { TaskInterface } from './Task.interface';
+import { TaskInterface } from './task.interface';
 
 export interface SubtaskInterface {
   id: number;

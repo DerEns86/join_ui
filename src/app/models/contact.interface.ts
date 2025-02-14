@@ -1,5 +1,5 @@
-import { UpdateMessage } from './enums/UpdateMessage.enum';
-import { TaskInterface } from './Task.interface';
+import { UpdateMessage } from './enums/updateMessage.enum';
+import { TaskInterface } from './task.interface';
 
 export interface ContactInterface {
   id: number;
