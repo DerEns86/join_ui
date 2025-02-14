@@ -7,17 +7,20 @@ import {
   Validators,
 } from '@angular/forms';
 import { TaskService } from '../../services/task.service';
+import { BreakpointService } from '../../services/breakpoint.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss',
 })
 export class AddTaskComponent {
   private fb: FormBuilder = inject(FormBuilder);
   private taskService: TaskService = inject(TaskService);
+  breakpointService: BreakpointService = inject(BreakpointService);
 
   public categories: String[] = [
     'Category 1',
