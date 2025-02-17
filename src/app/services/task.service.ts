@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { TaskInterface } from '../models/Task.interface';
+import { TaskInterface } from '../models/task.interface';
 import { SubtaskInterface } from '../models/subtask.interface';
 import { Observable, Subject, switchMap, takeUntil } from 'rxjs';
 
@@ -14,9 +14,15 @@ export class TaskService implements OnDestroy {
 
   readonly BASE_URL = environment.API_URL;
 
+  tasks$: Observable<TaskInterface[]> = this.getTasks();
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  getTasks(): Observable<TaskInterface[]> {
+    return this.http.get<TaskInterface[]>(`${this.BASE_URL}api/tasks/all`);
   }
 
   addTask(task: TaskInterface): Observable<string> {

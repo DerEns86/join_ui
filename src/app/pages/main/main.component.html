@@ -1,15 +1,7 @@
-<p>main works!</p>
-{{ currentUser?.username }}
-<button class="btn btn-primary">Click</button>
-<button class="btn btn-outline-secondary">Click</button>
-
 <section>
-  <div class="row">
-    <div class="col-12">
-      <h3>Join 360 | Key Metrics at a Glance</h3>
-    </div>
-  </div>
-  <div class="d-flex">
+  <h3>Join 360 | Key Metrics at a Glance</h3>
+
+  <div class="d-flex main-content">
     <div class="summary-content">
       <div class="row m-3">
         <div class="col-6">
@@ -30,7 +22,9 @@
                 </svg>
               </span>
               <h4>To-Do</h4>
-              <p>0</p>
+              @if (getNumberOfFilteredTasks(Status.PENDING) !== 0) {
+              <p>{{ getNumberOfFilteredTasks(Status.PENDING) }}</p>
+              }
             </div>
           </div>
         </div>
@@ -55,7 +49,9 @@
                 </svg>
               </span>
               <h4>Done</h4>
-              <p>0</p>
+              @if (getNumberOfFilteredTasks(Status.DONE) !== 0) {
+              <p>{{ getNumberOfFilteredTasks(Status.DONE) }}</p>
+              }
             </div>
           </div>
         </div>
@@ -77,6 +73,7 @@
           <div class="card">
             <div class="card-text">
               <p>Tasks in Board</p>
+              <p>{{ getNumberOfAllTasks() }}</p>
             </div>
           </div>
         </div>
@@ -84,6 +81,9 @@
           <div class="card">
             <div class="card-text">
               <p>Tasks in Progress</p>
+              @if (getNumberOfFilteredTasks(Status.IN_PROGRESS) !== 0) {
+              <p>{{ getNumberOfFilteredTasks(Status.IN_PROGRESS) }}</p>
+              }
             </div>
           </div>
         </div>
@@ -91,13 +91,24 @@
           <div class="card">
             <div class="card-text">
               <p>Awaiting Feedback</p>
+              @if (getNumberOfFilteredTasks(Status.AWAITING_FEEDBACK) !== 0) {
+              <p>{{ getNumberOfFilteredTasks(Status.AWAITING_FEEDBACK) }}</p>
+              }
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="greeting">
-      <p>Good mornig, User!</p>
+      <p>Good mornig, {{ username }}!</p>
     </div>
   </div>
 </section>
+
+<!-- <div>
+  @for(task of tasks ; track $index){
+  <p>{{ task.name }}</p>
+  <p>{{ task.status }}</p>
+  <p>{{ task.priority }}</p>
+  }
+</div> -->

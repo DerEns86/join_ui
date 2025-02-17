@@ -18,7 +18,7 @@ export class TaskComponent implements OnInit {
   public tasksNames: string[] = [];
 
   ngOnInit(): void {
-    this.fetchData();
+    // this.fetchData();
   }
 
   fetchData() {
