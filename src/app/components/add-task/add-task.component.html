@@ -51,6 +51,21 @@
           </div>
           }
         </div>
+        <div class="form-group">
+          <label for="categoryName">Category</label>
+          <select
+            class="form-control"
+            id="category"
+            formControlName="categoryName"
+          >
+            @for (category of categories; track $index) {
+            <option [value]="category.name">
+              {{ category.name }}
+            </option>
+            }
+          </select>
+        </div>
+
         <button type="button" (click)="addSubtask()">+</button>
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>

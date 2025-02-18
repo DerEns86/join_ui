@@ -1,3 +1,4 @@
+import { CategoryInterface } from './category.interface';
 import { ContactInterface } from './contact.interface';
 import { Priority } from './enums/priority.enum';
 import { Status } from './enums/status.enum';
@@ -18,5 +19,5 @@ export interface TaskInterface {
   updateMessage: UpdateMessage;
   contacts: ContactInterface[];
   subtasks: SubtaskInterface[];
-  category: string;
+  category: CategoryInterface;
 }

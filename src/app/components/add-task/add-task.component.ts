@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -9,6 +9,9 @@ import {
 import { TaskService } from '../../services/task.service';
 import { BreakpointService } from '../../services/breakpoint.service';
 import { CommonModule } from '@angular/common';
+import { CategoryService } from '../../services/category.service';
+import { CategoryInterface } from '../../models/category.interface';
+import { TaskInterface } from '../../models/task.interface';
 
 @Component({
   selector: 'app-add-task',
@@ -17,17 +20,13 @@ import { CommonModule } from '@angular/common';
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss',
 })
-export class AddTaskComponent {
+export class AddTaskComponent implements OnInit {
   private fb: FormBuilder = inject(FormBuilder);
   private taskService: TaskService = inject(TaskService);
+  private categoryService: CategoryService = inject(CategoryService);
   breakpointService: BreakpointService = inject(BreakpointService);
 
-  public categories: String[] = [
-    'Category 1',
-    'Category 2',
-    'Category 3',
-    'Category 4',
-  ];
+  public categories: CategoryInterface[] = [];
 
   addTaskForm: FormGroup = this.fb.group({
     name: ['', Validators.required],
@@ -35,11 +34,22 @@ export class AddTaskComponent {
     priority: ['MEDIUM'],
     dueDate: ['', Validators.required],
     subtasks: this.fb.array([]),
+    categoryName: [''],
   });
 
+  ngOnInit(): void {
+    this.getCategories();
+  }
+
   onSubmit() {
-    const { subtasks, ...taskData } = this.addTaskForm.value;
-    this.taskService.addTaskWithSubtasks(taskData, subtasks);
+    const { subtasks, categoryName, ...taskData } = this.addTaskForm.value;
+
+    const task: TaskInterface = {
+      ...taskData,
+      category: categoryName ? { name: categoryName } : null,
+    };
+
+    this.taskService.addTaskWithSubtasks(task, subtasks);
   }
 
   get subtasks(): FormArray {
@@ -57,5 +67,14 @@ export class AddTaskComponent {
 
   removeSubtask(index: number) {
     this.subtasks.removeAt(index);
+  }
+
+  getCategories() {
+    return this.categoryService.getCategories().subscribe({
+      next: (data) => {
+        this.categories = data;
+        console.log('Categories:', this.categories);
+      },
+    });
   }
 }
