@@ -5,6 +5,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { TaskComponent } from './pages/task/task.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { authGuard } from './guards/auth.guard';
+import { ContactComponent } from './pages/contact/contact.component';
 
 export const routes: Routes = [
   // { path: '', component: MainComponent },
@@ -17,6 +18,7 @@ export const routes: Routes = [
     children: [
       { path: '', component: MainComponent },
       { path: 'task', component: TaskComponent },
+      { path: 'contacts', component: ContactComponent },
     ],
   },
 ];
