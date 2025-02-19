@@ -33,7 +33,6 @@ export class DialogContactComponent {
 
   onSubmit() {
     if (this.contactForm.valid) {
-      console.log(this.contactForm.value);
       this.contactService.addContact(this.contactForm.value);
       this.activeModal.close();
     } else {

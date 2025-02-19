@@ -1,5 +1,4 @@
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
-import { ContactInterface } from '../../models/contact.interface';
+import { Component, inject } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DialogContactComponent } from '../../components/dialog-contact/dialog-contact.component';
