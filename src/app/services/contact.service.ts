@@ -31,6 +31,13 @@ export class ContactService {
     return this.contactSig;
   }
 
+  addContact(newContact: ContactInterface) {
+    this.http.post(`${this.BASE_URL}api/contact`, newContact).subscribe({
+      next: () =>
+        this.contactSig.update((contacts) => [...contacts, newContact]),
+    });
+  }
+
   deleteContact(contactId: number) {
     this.http.delete(`${this.BASE_URL}api/contact/${contactId}`).subscribe({
       next: () =>
