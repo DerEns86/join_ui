@@ -1,1 +1,7 @@
-<section></section>
+<section>
+  @for (contact of contacts(); track $index) {
+  <p>{{ contact.firstName }}</p>
+  <p>{{ contact.id }}</p>
+  <button (click)="deleteContact(contact.id)">X</button>
+  }
+</section>
