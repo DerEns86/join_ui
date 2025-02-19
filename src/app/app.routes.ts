@@ -6,6 +6,7 @@ import { TaskComponent } from './pages/task/task.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { authGuard } from './guards/auth.guard';
 import { ContactComponent } from './pages/contact/contact.component';
+import { ContactDetailsComponent } from './pages/contact-details/contact-details.component';
 
 export const routes: Routes = [
   // { path: '', component: MainComponent },
@@ -19,6 +20,7 @@ export const routes: Routes = [
       { path: '', component: MainComponent },
       { path: 'task', component: TaskComponent },
       { path: 'contacts', component: ContactComponent },
+      { path: 'contacts/:id', component: ContactDetailsComponent },
     ],
   },
 ];

@@ -1,8 +1,12 @@
 <section>
   @for (contact of contacts(); track $index) {
-  <p>{{ contact.firstName }}</p>
-  <p>{{ contact.id }}</p>
-  <button (click)="deleteContact(contact.id)">X</button>
+  <div>
+    <div [routerLink]="['/contacts', contact.id]">
+      <p>{{ contact.firstName }}</p>
+      <p>{{ contact.id }}</p>
+    </div>
+    <button (click)="deleteContact(contact.id)">X</button>
+  </div>
   }
 
   <button class="btn btn-primary" (click)="openModal()">Add Contact</button>

@@ -11,6 +11,7 @@ export class ContactService {
   readonly BASE_URL = environment.API_URL;
 
   contactSig = signal<ContactInterface[]>([]);
+  singleContactSig = signal<ContactInterface | null>(null);
 
   constructor() {
     this.fetchContacts();
@@ -29,10 +30,22 @@ export class ContactService {
   }
 
   addContact(newContact: ContactInterface) {
-    this.http.post(`${this.BASE_URL}api/contact`, newContact).subscribe({
-      next: () =>
-        this.contactSig.update((contacts) => [...contacts, newContact]),
-    });
+    this.http
+      .post<ContactInterface>(`${this.BASE_URL}api/contact`, newContact)
+      .subscribe({
+        next: (response) =>
+          this.contactSig.update((contacts) => [...contacts, response]),
+      });
+  }
+
+  getContactById(contactId: number) {
+    return this.http.get<ContactInterface>(
+      `${this.BASE_URL}api/contact/${contactId}`
+    );
+  }
+
+  getSingleContact() {
+    return this.singleContactSig;
   }
 
   deleteContact(contactId: number) {
