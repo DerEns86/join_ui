@@ -1,9 +1,17 @@
 header {
-  width: calc(100vw - 12rem);
+  // width: calc(100vw - 12rem);
 
   .content {
     height: 6rem;
-    padding-inline: 1rem;
+    /* padding-inline: 1rem; */
+    padding-right: 1rem;
+    /* width: 100%; */
+    padding-left: 13rem;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
   }
 
   h5 {
@@ -52,6 +60,10 @@ header {
   right: 0;
   width: 100%;
   z-index: 999;
+
+  .content {
+    padding-left: 1rem !important;
+  }
 }
 
 .logo {

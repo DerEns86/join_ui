@@ -1,14 +1,5 @@
-<section>
-  <div class="d-flex mx-0">
-    <!-- <div class="row">
-      <div class="col-md-4"> -->
-    <app-navbar></app-navbar>
-    <div class="flex-grow-1">
-      <app-header></app-header>
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-  <div class="col-md-8"></div>
-  <!-- </div>
-    </div> -->
-</section>
+<app-navbar style="position: absolute; z-index: 999"></app-navbar>
+<app-header></app-header>
+<main style="position: relative; padding-left: 13rem; padding-top: 8rem">
+  <router-outlet></router-outlet>
+</main>
