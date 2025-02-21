@@ -7,6 +7,7 @@ import { LayoutComponent } from './pages/layout/layout.component';
 import { authGuard } from './guards/auth.guard';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ContactDetailsComponent } from './pages/contact-details/contact-details.component';
+import { BoardComponent } from './pages/board/board.component';
 
 export const routes: Routes = [
   // { path: '', component: MainComponent },
@@ -19,6 +20,7 @@ export const routes: Routes = [
     children: [
       { path: '', component: MainComponent },
       { path: 'task', component: TaskComponent },
+      { path: 'board', component: BoardComponent },
       { path: 'contacts', component: ContactComponent },
       { path: 'contacts/:id', component: ContactDetailsComponent },
     ],

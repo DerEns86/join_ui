@@ -1,0 +1,81 @@
+<div class="board">
+  <div class="column">
+    <h3>To Do</h3>
+    <div
+      cdkDropList
+      cdkDropListOrientation="mixed"
+      [cdkDropListData]="pending"
+      [cdkDropListConnectedTo]="[
+        'inProgressList',
+        'awaitingFeedbackList',
+        'doneList'
+      ]"
+      id="pendingList"
+      class="task-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="task" *ngFor="let task of pending" cdkDrag>
+        {{ task.name }}
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <h3>In Progress</h3>
+    <div
+      cdkDropList
+      cdkDropListOrientation="mixed"
+      [cdkDropListData]="inProgress"
+      [cdkDropListConnectedTo]="[
+        'pendingList',
+        'awaitingFeedbackList',
+        'doneList'
+      ]"
+      id="inProgressList"
+      class="task-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="task" *ngFor="let task of inProgress" cdkDrag>
+        {{ task.name }}
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <h3>Awaiting Feedback</h3>
+    <div
+      cdkDropList
+      cdkDropListOrientation="mixed"
+      [cdkDropListData]="awaitingFeedback"
+      [cdkDropListConnectedTo]="['pendingList', 'inProgressList', 'doneList']"
+      id="awaitingFeedbackList"
+      class="task-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="task" *ngFor="let task of awaitingFeedback" cdkDrag>
+        {{ task.name }}
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <h3>Done</h3>
+    <div
+      cdkDropList
+      cdkDropListOrientation="mixed"
+      [cdkDropListData]="done"
+      [cdkDropListConnectedTo]="[
+        'pendingList',
+        'inProgressList',
+        'awaitingFeedbackList'
+      ]"
+      id="doneList"
+      class="task-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="task" *ngFor="let task of done" cdkDrag>
+        {{ task.name }}
+      </div>
+    </div>
+  </div>
+</div>
