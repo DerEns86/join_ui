@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { TaskService } from '../../services/task.service';
-import { Subject, takeUntil } from 'rxjs';
+import { catchError, Observable, of, Subject, takeUntil } from 'rxjs';
 import { TaskInterface } from '../../models/task.interface';
 
 import {
@@ -12,6 +12,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Status } from '../../models/enums/status.enum';
 import { CommonModule } from '@angular/common';
+import { SubtaskInterface } from '../../models/subtask.interface';
 
 @Component({
   selector: 'app-board',
@@ -22,6 +23,8 @@ import { CommonModule } from '@angular/common';
 })
 export class BoardComponent implements OnInit {
   private taskService: TaskService = inject(TaskService);
+
+  subtasksMap: Record<string, Observable<SubtaskInterface[]>> = {};
 
   private destroy$ = new Subject<void>();
 
@@ -58,6 +61,8 @@ export class BoardComponent implements OnInit {
             Status.DONE
         );
         console.log('tasks: ', this.tasks);
+
+        this.tasks.forEach((task) => this.loadSubtasks(task.id));
       },
     });
   }
@@ -78,10 +83,8 @@ export class BoardComponent implements OnInit {
       console.log('Gefundene Task:', task);
       console.log('Task ID:', task?.id);
 
-      // Default-Wert für newStatus setzen
       let newStatus: Status = Status.PENDING;
 
-      // Bestimmen, in welche Spalte das Task verschoben wurde
       switch (event.container.id) {
         case 'inProgressList':
           newStatus = Status.IN_PROGRESS;
@@ -98,10 +101,8 @@ export class BoardComponent implements OnInit {
           break;
       }
 
-      // Status des Tasks aktualisieren
       task.status = newStatus;
 
-      // Element in die neue Liste verschieben
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
@@ -109,8 +110,39 @@ export class BoardComponent implements OnInit {
         event.currentIndex
       );
 
-      // Status in der Datenbank speichern
-      console.log('Task:', +task.id, 'Status:', task.status);
+      this.taskService.updateTaskStatus(task.id, task.status).subscribe({
+        next: (data) => {
+          console.log('Task updated:', data);
+        },
+        error: (err) => {
+          console.error('Error updating task:', err);
+        },
+      });
     }
+  }
+
+  loadSubtasks(taskId: string): void {
+    this.subtasksMap[taskId] = this.taskService.getSubtasks(taskId).pipe(
+      catchError((err) => {
+        console.error(`Error fetching subtask for task ${taskId}:`, err);
+        return of([]);
+      })
+    );
+  }
+
+  calculateProgress(subtasks: SubtaskInterface[]): number {
+    if (!subtasks || subtasks.length === 0) {
+      return 0;
+    }
+    const completed = subtasks.filter((s) => s.isCompleted).length;
+    return (completed / subtasks.length) * 100;
+  }
+
+  getCompletedSubtasks(subtasks: SubtaskInterface[]): number {
+    return subtasks ? subtasks.filter((s) => s.isCompleted).length : 0;
+  }
+
+  getTotalSubtasks(subtasks: SubtaskInterface[]): number {
+    return subtasks ? subtasks.length : 0;
   }
 }

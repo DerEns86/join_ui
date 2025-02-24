@@ -70,4 +70,17 @@ export class TaskService implements OnDestroy {
         },
       });
   }
+
+  updateTaskStatus(taskId: string, status: string): Observable<TaskInterface> {
+    return this.http.patch<TaskInterface>(
+      `${this.BASE_URL}api/tasks/${taskId}`,
+      { status }
+    );
+  }
+
+  getSubtasks(taskId: string): Observable<SubtaskInterface[]> {
+    return this.http.get<SubtaskInterface[]>(
+      `${this.BASE_URL}api/tasks/${taskId}/subtasks`
+    );
+  }
 }
