@@ -19,5 +19,6 @@ export interface TaskInterface {
   updateMessage: UpdateMessage;
   contacts: ContactInterface[];
   subtasks: SubtaskInterface[];
-  category: CategoryInterface;
+  // category: CategoryInterface;
+  categoryName: string;
 }

@@ -17,7 +17,7 @@
       >
         <div class="task card mb-2" *ngFor="let task of pending" cdkDrag>
           <div class="task-header text-white text-center fw-bold bg-info">
-            Technical Task
+            {{ task.categoryName }}
           </div>
           <div class="card-body">
             <h5 class="card-title">{{ task.name }}</h5>
