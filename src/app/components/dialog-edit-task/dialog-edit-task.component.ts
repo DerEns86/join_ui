@@ -152,7 +152,20 @@ export class DialogEditTaskComponent {
   }
 
   removeSubtask(index: number) {
-    this.subtasks.removeAt(index);
+    const subtaskId = this.subtasks.at(index).get('id')?.value;
+    if (subtaskId) {
+      this.taskService.deleteSubtask(subtaskId).subscribe({
+        next: () => {
+          console.log('Subtask deleted:', subtaskId);
+          this.subtasks.removeAt(index);
+        },
+        error: (err) => {
+          console.error('Error deleting subtask:', err);
+        },
+      });
+    } else {
+      this.subtasks.removeAt(index);
+    }
   }
 
   getCategories() {

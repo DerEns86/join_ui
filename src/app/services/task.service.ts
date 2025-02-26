@@ -121,4 +121,10 @@ export class TaskService implements OnDestroy {
       `${this.BASE_URL}api/tasks/${taskId}/subtasks`
     );
   }
+
+  deleteSubtask(subtaskId: number): Observable<void> {
+    return this.http.delete<void>(
+      `${this.BASE_URL}api/tasks/subtask/${subtaskId}`
+    );
+  }
 }
