@@ -142,6 +142,19 @@ export class DialogEditTaskComponent {
     return this.editTaskForm.get('subtasks') as FormArray;
   }
 
+  addSubtask() {
+    this.subtasks.push(
+      this.fb.group({
+        name: ['', Validators.required],
+        isCompleted: [false],
+      })
+    );
+  }
+
+  removeSubtask(index: number) {
+    this.subtasks.removeAt(index);
+  }
+
   getCategories() {
     return this.categoryService.getCategories().subscribe({
       next: (data) => {

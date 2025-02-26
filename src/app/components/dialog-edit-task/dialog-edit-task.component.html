@@ -52,18 +52,8 @@
           />
         </div>
         <div formArrayName="subtasks">
-          <!-- @for (subtask of subtasks.controls; let i = $index; track $index) {
-          <div [formGroupName]="i">
-            <input formControlName="name" placeholder="Subtask Name" />
-            <button type="button">-</button>
-          </div>
-          } -->
-
-          <div
-            *ngFor="let subtask of subtasks.controls; let i = index"
-            [formGroupName]="i"
-            class="form-group"
-          >
+          @for (subtask of subtasks.controls; let i = $index; track $index) {
+          <div [formGroupName]="i" class="form-group">
             <label for="subtaskName">Subtask Name</label>
             <input
               type="text"
@@ -77,7 +67,9 @@
               id="isCompleted"
               formControlName="isCompleted"
             />
+            <button type="button" (click)="removeSubtask(i)">-</button>
           </div>
+          }
         </div>
         <div class="form-group">
           <label for="categoryName">Category</label>
@@ -94,7 +86,7 @@
           </select>
         </div>
 
-        <button type="button">+</button>
+        <button type="button" (click)="addSubtask()">+</button>
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>
     </div>
