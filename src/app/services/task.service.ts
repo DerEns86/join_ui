@@ -3,7 +3,15 @@ import { inject, Injectable, OnDestroy } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { TaskInterface } from '../models/task.interface';
 import { SubtaskInterface } from '../models/subtask.interface';
-import { Observable, Subject, switchMap, takeUntil } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  of,
+  Subject,
+  switchMap,
+  takeUntil,
+  tap,
+} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +22,12 @@ export class TaskService implements OnDestroy {
 
   readonly BASE_URL = environment.API_URL;
 
-  tasks$: Observable<TaskInterface[]> = this.getTasks();
+  private tasksSubject = new BehaviorSubject<TaskInterface[]>([]);
+  tasks$ = this.tasksSubject.asObservable();
+
+  constructor() {
+    this.loadTasks();
+  }
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -23,6 +36,14 @@ export class TaskService implements OnDestroy {
 
   getTasks(): Observable<TaskInterface[]> {
     return this.http.get<TaskInterface[]>(`${this.BASE_URL}api/tasks/all`);
+  }
+
+  loadTasks() {
+    this.http
+      .get<TaskInterface[]>(`${this.BASE_URL}api/tasks/all`)
+      .subscribe((tasks) => {
+        this.tasksSubject.next(tasks);
+      });
   }
 
   addTask(task: TaskInterface): Observable<string> {
@@ -75,6 +96,23 @@ export class TaskService implements OnDestroy {
     return this.http.patch<TaskInterface>(
       `${this.BASE_URL}api/tasks/${taskId}`,
       { status }
+    );
+  }
+
+  updateTask(task: TaskInterface): Observable<TaskInterface> {
+    return this.http
+      .put<TaskInterface>(`${this.BASE_URL}api/tasks/${task.id}`, task)
+      .pipe(tap(() => this.loadTasks()));
+  }
+
+  updateSubtask(
+    taskId: string,
+    subtaskId: number,
+    subtask: SubtaskInterface
+  ): Observable<SubtaskInterface> {
+    return this.http.put<SubtaskInterface>(
+      `${this.BASE_URL}api/tasks/${taskId}/subtask/${subtaskId}`,
+      subtask
     );
   }
 
