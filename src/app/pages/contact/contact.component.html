@@ -1,0 +1,43 @@
+<section>
+  <div class="d-flex">
+    <div class="w-50 bg-white content py-4">
+      <div class="container-fluid d-flex mb-4">
+        <button class="btn fs-2 btn-primary add-button" (click)="openModal()">
+          Add Contact <i class="bi bi-person-plus"></i>
+        </button>
+      </div>
+      @for (contact of coloredContacts(); track $index) {
+      <div class="ps-2 m-3 bg-body-secondary mb-2 rounded">
+        <div
+          [routerLink]="['/contacts', contact.id]"
+          class="d-flex align-items-center"
+        >
+          <div>
+            <span
+              class="initials"
+              [ngStyle]="{ 'background-color': contact.color }"
+              >{{ getInitials(contact.firstName, contact.lastName) }}
+            </span>
+          </div>
+          <div class="content-info">
+            <p class="content-name">
+              {{ contact.firstName }} {{ contact.lastName }}
+            </p>
+
+            <p>{{ contact.email }}</p>
+            <p>{{ contact.phone }}</p>
+          </div>
+        </div>
+        <!-- <button (click)="deleteContact(contact.id)">X</button> -->
+      </div>
+      }
+    </div>
+    <div class="contact-card">
+      <div class="d-flex align-items-center gap-5">
+        <p class="contact-text">Contacts</p>
+        <hr class="seperator" />
+        <span class="fs-3">Better with a team</span>
+      </div>
+    </div>
+  </div>
+</section>

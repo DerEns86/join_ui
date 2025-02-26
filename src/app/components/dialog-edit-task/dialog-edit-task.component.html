@@ -1,9 +1,17 @@
 <section>
-  <form [formGroup]="addTaskForm" (ngSubmit)="onSubmit()">
-    <div
-      class="w-100 wrapper d-flex justify-content-around"
-      [ngClass]="{ mobile: breakpointService.isMobileView }"
+  <div class="modal-header">
+    <h4 class="modal-title">Edit</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"
     >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form [formGroup]="editTaskForm" (ngSubmit)="onSubmit()">
+    <div class="w-100 wrapper d-flex justify-content-around">
       <div class="col-md-5">
         <div class="form-group">
           <label for="name">Name</label>
@@ -44,12 +52,32 @@
           />
         </div>
         <div formArrayName="subtasks">
-          @for (subtask of subtasks.controls; let i = $index; track $index) {
+          <!-- @for (subtask of subtasks.controls; let i = $index; track $index) {
           <div [formGroupName]="i">
             <input formControlName="name" placeholder="Subtask Name" />
-            <button type="button" (click)="removeSubtask(i)">-</button>
+            <button type="button">-</button>
           </div>
-          }
+          } -->
+
+          <div
+            *ngFor="let subtask of subtasks.controls; let i = index"
+            [formGroupName]="i"
+            class="form-group"
+          >
+            <label for="subtaskName">Subtask Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="subtaskName"
+              formControlName="name"
+            />
+            <label for="isCompleted">Completed</label>
+            <input
+              type="checkbox"
+              id="isCompleted"
+              formControlName="isCompleted"
+            />
+          </div>
         </div>
         <div class="form-group">
           <label for="categoryName">Category</label>
@@ -66,14 +94,16 @@
           </select>
         </div>
 
-        <button type="button" (click)="addSubtask()">+</button>
+        <button type="button">+</button>
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>
     </div>
   </form>
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="activeModal.close('Close click')"
+  >
+    Schließen
+  </button>
 </section>
-
-<!--
-//TODO change input to textarea for description 
-//TODO change option for priority to single buttons
-  -->

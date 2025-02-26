@@ -1,0 +1,221 @@
+<div>
+  <div class="d-flex flex-wrap">
+    <div style="width: 276px">
+      <h3>To Do</h3>
+      <div
+        cdkDropList
+        cdkDropListOrientation="mixed"
+        [cdkDropListData]="pending"
+        [cdkDropListConnectedTo]="[
+          'inProgressList',
+          'awaitingFeedbackList',
+          'doneList'
+        ]"
+        id="pendingList"
+        class="task-list"
+        (cdkDropListDropped)="drop($event)"
+      >
+        @for (task of pending; track $index) {
+        <div class="task card mb-2" cdkDrag (click)="openEditTaskModal(task)">
+          <div class="task-header text-white text-center fw-bold bg-info">
+            {{ task.categoryName }}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ task.name }}</h5>
+            <p class="card-text text-muted text-truncate">
+              {{ task.description }}
+            </p>
+
+            @if (subtasksMap[task.id] | async; as subtasks) { @if
+            (subtasks.length > 0) {
+            <div>
+              <div class="progress mt-2">
+                <div
+                  class="progress-bar bg-primary"
+                  role="progressbar"
+                  [style.width.%]="calculateProgress(subtasks)"
+                  aria-valuenow="calculateProgress(subtasks)"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+              <p class="small mt-1">
+                {{ getCompletedSubtasks(subtasks) }}/{{
+                  getTotalSubtasks(subtasks)
+                }}
+                Subtasks
+              </p>
+            </div>
+            } }
+          </div>
+
+          <div class="avatars mt-2">
+            <span class="avatar"> user.initials </span>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+
+    <div style="width: 276px">
+      <h3>In Progress</h3>
+      <div
+        cdkDropList
+        cdkDropListOrientation="mixed"
+        [cdkDropListData]="inProgress"
+        [cdkDropListConnectedTo]="[
+          'pendingList',
+          'awaitingFeedbackList',
+          'doneList'
+        ]"
+        id="inProgressList"
+        class="task-list"
+        (cdkDropListDropped)="drop($event)"
+      >
+        @for (task of inProgress; track $index) {
+        <div class="task card mb-2" cdkDrag (click)="openEditTaskModal(task)">
+          <div class="task-header text-white text-center fw-bold bg-info">
+            {{ task.categoryName }}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ task.name }}</h5>
+            <p class="card-text text-muted text-truncate">
+              {{ task.description }}
+            </p>
+
+            @if (subtasksMap[task.id] | async; as subtasks) { @if
+            (subtasks.length > 0) {
+            <div>
+              <div class="progress mt-2">
+                <div
+                  class="progress-bar bg-primary"
+                  role="progressbar"
+                  [style.width.%]="calculateProgress(subtasks)"
+                  aria-valuenow="calculateProgress(subtasks)"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+              <p class="small mt-1">
+                {{ getCompletedSubtasks(subtasks) }}/{{
+                  getTotalSubtasks(subtasks)
+                }}
+                Subtasks
+              </p>
+            </div>
+            }}
+          </div>
+
+          <div class="avatars mt-2">
+            <span class="avatar"> user.initials </span>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+
+    <div style="width: 276px">
+      <h3>Awaiting Feedback</h3>
+      <div
+        cdkDropList
+        cdkDropListOrientation="mixed"
+        [cdkDropListData]="awaitingFeedback"
+        [cdkDropListConnectedTo]="['pendingList', 'inProgressList', 'doneList']"
+        id="awaitingFeedbackList"
+        class="task-list"
+        (cdkDropListDropped)="drop($event)"
+      >
+        @for (task of awaitingFeedback; track $index) {
+        <div class="task card mb-2" cdkDrag (click)="openEditTaskModal(task)">
+          <div class="task-header text-white text-center fw-bold bg-info">
+            {{ task.categoryName }}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ task.name }}</h5>
+            <p class="card-text text-muted text-truncate">
+              {{ task.description }}
+            </p>
+
+            @if (subtasksMap[task.id] | async; as subtasks) { @if
+            (subtasks.length > 0) {
+            <div class="progress mt-2">
+              <div
+                class="progress-bar bg-primary"
+                role="progressbar"
+                [style.width.%]="calculateProgress(subtasks)"
+                aria-valuenow="calculateProgress(subtasks)"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
+            <p class="small mt-1">
+              {{ getCompletedSubtasks(subtasks) }}/{{
+                getTotalSubtasks(subtasks)
+              }}
+              Subtasks
+            </p>
+            }}
+            <div class="avatars mt-2">
+              <span class="avatar"> user.initials </span>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+
+    <div style="width: 276px">
+      <h3>Done</h3>
+      <div
+        cdkDropList
+        cdkDropListOrientation="mixed"
+        [cdkDropListData]="done"
+        [cdkDropListConnectedTo]="[
+          'pendingList',
+          'inProgressList',
+          'awaitingFeedbackList'
+        ]"
+        id="doneList"
+        class="task-list"
+        (cdkDropListDropped)="drop($event)"
+      >
+        @for (task of done; track $index) {
+        <div class="task card mb-2" cdkDrag (click)="openEditTaskModal(task)">
+          <div class="task-header text-white text-center fw-bold bg-info">
+            {{ task.categoryName }}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ task.name }}</h5>
+            <p class="card-text text-muted text-truncate">
+              {{ task.description }}
+            </p>
+
+            @if (subtasksMap[task.id] | async; as subtasks) { @if
+            (subtasks.length > 0) {
+            <div class="progress mt-2">
+              <div
+                class="progress-bar bg-primary"
+                role="progressbar"
+                [style.width.%]="calculateProgress(subtasks)"
+                aria-valuenow="calculateProgress(subtasks)"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
+            <p class="small mt-1">
+              {{ getCompletedSubtasks(subtasks) }}/{{
+                getTotalSubtasks(subtasks)
+              }}
+              Subtasks
+            </p>
+            }}
+            <div class="avatars mt-2">
+              <span class="avatar"> user.initials </span>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,95 @@
+<div class="modal-header">
+  <h4 class="modal-title">Contacts</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="firstName">Vorname</label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstName"
+        formControlName="firstName"
+      />
+      @if (contactForm.get('firstName')?.invalid &&
+      (contactForm.get('firstName')?.dirty ||
+      contactForm.get('firstName')?.touched)) { @if
+      (contactForm.get('firstName')?.errors?.['required']) {
+      <div>Vorname ist erforderlich.</div>
+      } }
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Nachname</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lastName"
+        formControlName="lastName"
+      />
+      @if (contactForm.get('lastName')?.invalid &&
+      (contactForm.get('lastName')?.dirty ||
+      contactForm.get('lastName')?.touched)) { @if
+      (contactForm.get('lastName')?.errors?.['required']) {
+      <div>Nachname ist erforderlich.</div>
+      } }
+    </div>
+
+    <div class="form-group">
+      <label for="email">E-Mail</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        formControlName="email"
+      />
+      @if (contactForm.get('email')?.invalid && (contactForm.get('email')?.dirty
+      || contactForm.get('email')?.touched)) { @if
+      (contactForm.get('email')?.errors?.['required']) {
+      <div>E-Mail ist erforderlich.</div>
+      } @if (contactForm.get('email')?.errors?.['email']) {
+      <div>Ungültige E-Mail-Adresse.</div>
+      } }
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Telefon</label>
+      <input
+        type="tel"
+        class="form-control"
+        id="phone"
+        formControlName="phone"
+      />
+      @if (contactForm.get('phone')?.invalid && (contactForm.get('phone')?.dirty
+      || contactForm.get('phone')?.touched)) { @if
+      (contactForm.get('phone')?.errors?.['required']) {
+      <div>Telefonnummer ist erforderlich.</div>
+      } }
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    (click)="onSubmit()"
+    class="btn btn-primary"
+    [disabled]="contactForm.invalid"
+    form="contactForm"
+  >
+    Absenden
+  </button>
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="activeModal.close('Close click')"
+  >
+    Schließen
+  </button>
+</div>

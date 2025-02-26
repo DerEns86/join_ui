@@ -1,3 +1,9 @@
 nav {
   width: 12rem;
 }
+
+@media (max-width: 600px) {
+  main {
+    padding-left: 0 !important;
+  }
+}
