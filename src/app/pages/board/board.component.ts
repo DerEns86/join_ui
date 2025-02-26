@@ -13,6 +13,8 @@ import {
 import { Status } from '../../models/enums/status.enum';
 import { CommonModule } from '@angular/common';
 import { SubtaskInterface } from '../../models/subtask.interface';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DialogEditTaskComponent } from '../../components/dialog-edit-task/dialog-edit-task.component';
 
 @Component({
   selector: 'app-board',
@@ -23,6 +25,7 @@ import { SubtaskInterface } from '../../models/subtask.interface';
 })
 export class BoardComponent implements OnInit {
   private taskService: TaskService = inject(TaskService);
+  private modalService: NgbModal = inject(NgbModal);
 
   subtasksMap: Record<string, Observable<SubtaskInterface[]>> = {};
 
@@ -144,5 +147,24 @@ export class BoardComponent implements OnInit {
 
   getTotalSubtasks(subtasks: SubtaskInterface[]): number {
     return subtasks ? subtasks.length : 0;
+  }
+
+  openEditTaskModal(task: TaskInterface): void {
+    const modalRef = this.modalService.open(DialogEditTaskComponent);
+    modalRef.componentInstance.task = task;
+
+    modalRef.result.then(
+      (result) => {
+        if (result) {
+          const index = this.tasks.findIndex((t) => t.id === result.id);
+          if (index !== -1) {
+            this.tasks[index] = result;
+          }
+        }
+      },
+      (reason) => {
+        console.log('Dismissed:', reason);
+      }
+    );
   }
 }
