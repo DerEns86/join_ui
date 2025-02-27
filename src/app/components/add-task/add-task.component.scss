@@ -1,5 +1,6 @@
 #description {
   height: 120px;
+  resize: none;
 }
 
 .mobile {
@@ -8,4 +9,13 @@
 
 .divider {
   border-left: 3px solid #dee2e6;
+}
+
+.btn-white {
+  background-color: white !important;
+  border: 1px solid #ccc;
+}
+
+.btn-width {
+  max-width: 33.33%;
 }
