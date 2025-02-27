@@ -110,7 +110,6 @@ export class DialogEditTaskComponent {
 
     this.taskService.updateTask(updatedTask).subscribe({
       next: (updatedTaskResponse) => {
-        console.log('Task updated:', updatedTaskResponse);
         const taskId = updatedTaskResponse.id;
 
         subtasks.forEach((subtask: SubtaskInterface) => {
@@ -156,7 +155,6 @@ export class DialogEditTaskComponent {
     if (subtaskId) {
       this.taskService.deleteSubtask(subtaskId).subscribe({
         next: () => {
-          console.log('Subtask deleted:', subtaskId);
           this.subtasks.removeAt(index);
         },
         error: (err) => {
@@ -172,7 +170,6 @@ export class DialogEditTaskComponent {
     return this.categoryService.getCategories().subscribe({
       next: (data) => {
         this.categories = data;
-        console.log('Categories:', this.categories);
       },
     });
   }

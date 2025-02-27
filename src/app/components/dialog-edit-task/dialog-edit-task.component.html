@@ -1,13 +1,12 @@
 <section>
-  <div class="modal-header">
+  <div class="modal-header justify-content-between">
     <h4 class="modal-title">Edit</h4>
     <button
       type="button"
-      class="close"
-      aria-label="Close"
+      class="btn btn-outline"
       (click)="activeModal.dismiss('Cross click')"
     >
-      <span aria-hidden="true">&times;</span>
+      <i class="bi bi-x-lg"></i>
     </button>
   </div>
   <form [formGroup]="editTaskForm" (ngSubmit)="onSubmit()">
@@ -32,7 +31,6 @@
           />
         </div>
       </div>
-      <div class="divider"></div>
       <div class="col-md-5">
         <div class="form-group">
           <label for="priority">Priority</label>
