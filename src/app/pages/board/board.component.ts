@@ -63,7 +63,6 @@ export class BoardComponent implements OnInit {
             Status[task.status as unknown as keyof typeof Status] ===
             Status.DONE
         );
-        console.log('tasks: ', this.tasks);
 
         this.tasks.forEach((task) => this.loadSubtasks(task.id));
       },
@@ -78,13 +77,7 @@ export class BoardComponent implements OnInit {
         event.currentIndex
       );
     } else {
-      console.log('Event Data:', event.previousContainer.data);
-      console.log('Previous Index:', event.previousIndex);
-
       const task = event.previousContainer.data[event.previousIndex];
-
-      console.log('Gefundene Task:', task);
-      console.log('Task ID:', task?.id);
 
       let newStatus: Status = Status.PENDING;
 

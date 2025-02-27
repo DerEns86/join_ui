@@ -1,9 +1,9 @@
 .cdk-drop-list {
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
+  // background-color: #f8f9fa;
+  // border: 1px solid #dee2e6;
   border-radius: 4px;
-  padding: 10px;
-  min-height: 200px;
+  // padding: 10px;
+  min-height: 300px;
 }
 
 .cdk-drag-preview {
@@ -32,15 +32,16 @@
 }
 
 .task {
-  //   max-height: 100px;
-  overflow: hidden; /* Ensure the draggable items do not overflow */
+  overflow: hidden;
+
+  .task-header {
+    padding-block: 0.25rem;
+  }
 }
 
 .card {
   width: 252px;
-  //   height: 244;
   height: auto;
   gap: 10px;
   border-radius: 24px;
-  padding: 16px;
 }
