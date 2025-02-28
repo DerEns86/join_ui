@@ -17,10 +17,11 @@
       >
         @for (task of pending; track $index) {
         <div class="task card mb-2" cdkDrag (click)="openEditTaskModal(task)">
-          <div
-            class="task-header text-muted text-center fw-bold bg-info bg-opacity-75"
-          >
-            {{ task.categoryName }}
+          <div class="task-header d-flex justify-content-between mx-3 pt-2">
+            <div class="bg-info bg-opacity-75 fw-medium px-3 rounded-4">
+              {{ task.categoryName }}
+            </div>
+            <app-priority-icon [priority]="task.priority"></app-priority-icon>
           </div>
           <div class="card-body">
             <h5 class="card-title">{{ task.name }}</h5>
@@ -72,10 +73,11 @@
       >
         @for (task of inProgress; track $index) {
         <div class="task card mb-2" cdkDrag (click)="openEditTaskModal(task)">
-          <div
-            class="task-header text-muted text-center fw-bold bg-info bg-opacity-75"
-          >
-            {{ task.categoryName }}
+          <div class="task-header d-flex justify-content-between mx-3 pt-2">
+            <div class="bg-info bg-opacity-75 fw-medium px-3 rounded-4">
+              {{ task.categoryName }}
+            </div>
+            <app-priority-icon [priority]="task.priority"></app-priority-icon>
           </div>
           <div class="card-body">
             <h5 class="card-title">{{ task.name }}</h5>
@@ -123,10 +125,11 @@
       >
         @for (task of awaitingFeedback; track $index) {
         <div class="task card mb-2" cdkDrag (click)="openEditTaskModal(task)">
-          <div
-            class="task-header text-muted text-center fw-bold bg-info bg-opacity-75"
-          >
-            {{ task.categoryName }}
+          <div class="task-header d-flex justify-content-between mx-3 pt-2">
+            <div class="bg-info bg-opacity-75 fw-medium px-3 rounded-4">
+              {{ task.categoryName }}
+            </div>
+            <app-priority-icon [priority]="task.priority"></app-priority-icon>
           </div>
           <div class="card-body">
             <h5 class="card-title">{{ task.name }}</h5>
@@ -176,10 +179,11 @@
       >
         @for (task of done; track $index) {
         <div class="task card mb-2" cdkDrag (click)="openEditTaskModal(task)">
-          <div
-            class="task-header text-muted text-center fw-bold bg-info bg-opacity-75"
-          >
-            {{ task.categoryName }}
+          <div class="task-header d-flex justify-content-between mx-3 pt-2">
+            <div class="bg-info bg-opacity-75 fw-medium px-3 rounded-4">
+              {{ task.categoryName }}
+            </div>
+            <app-priority-icon [priority]="task.priority"></app-priority-icon>
           </div>
           <div class="card-body">
             <h5 class="card-title">{{ task.name }}</h5>

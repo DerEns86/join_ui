@@ -15,11 +15,12 @@ import { CommonModule } from '@angular/common';
 import { SubtaskInterface } from '../../models/subtask.interface';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DialogEditTaskComponent } from '../../components/dialog-edit-task/dialog-edit-task.component';
+import { PriorityIconComponent } from '../../components/priority-icon/priority-icon.component';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CdkDropList, CdkDrag, CommonModule],
+  imports: [CdkDropList, CdkDrag, CommonModule, PriorityIconComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
@@ -40,6 +41,7 @@ export class BoardComponent implements OnInit {
   done: TaskInterface[] = [];
 
   ngOnInit(): void {
+    this.taskService.loadTasks();
     this.taskService.tasks$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (data) => {
         this.tasks = data;
