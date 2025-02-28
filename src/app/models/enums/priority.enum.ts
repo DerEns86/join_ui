@@ -1,5 +1,5 @@
 export enum Priority {
-  URGENT,
-  MEDIUM,
-  LOW,
+  URGENT = 'URGENT',
+  MEDIUM = 'MEDIUM',
+  LOW = 'LOW',
 }
