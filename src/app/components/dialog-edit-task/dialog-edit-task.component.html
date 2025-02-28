@@ -9,91 +9,102 @@
       <i class="bi bi-x-lg"></i>
     </button>
   </div>
-  <form [formGroup]="editTaskForm" (ngSubmit)="onSubmit()">
-    <div class="w-100 wrapper d-flex justify-content-around">
-      <div class="col-md-5">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            formControlName="name"
-          />
-        </div>
-        <div class="form-group">
-          <label for="description">Description</label>
-          <input
-            type="text"
-            class="form-control"
-            id="description"
-            formControlName="description"
-          />
-        </div>
+  <form [formGroup]="editTaskForm" class="modal-body">
+    <div class="w-100 wrapper">
+      <input
+        type="text"
+        class="form-control fs-5 fw-semibold border-0"
+        id="name"
+        formControlName="name"
+      />
+      <input
+        type="text"
+        class="form-control border-0"
+        id="description"
+        formControlName="description"
+      />
+      <div class="d-flex align-items-center pt-3">
+        <label for="priority" class="text-muted">Priority:</label>
+        <select class="form-control" id="priority" formControlName="priority">
+          <option value="LOW" class="text-success">LOW</option>
+          <option value="MEDIUM" class="text-warning">MEDIUM</option>
+          <option value="URGENT" class="text-danger">URGENT</option>
+        </select>
       </div>
-      <div class="col-md-5">
-        <div class="form-group">
-          <label for="priority">Priority</label>
-          <select class="form-control" id="priority" formControlName="priority">
-            <option value="LOW">LOW</option>
-            <option value="MEDIUM">MEDIUM</option>
-            <option value="URGENT">URGENT</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="dueDate">Due Date</label>
-          <input
-            type="date"
-            class="form-control"
-            id="dueDate"
-            formControlName="dueDate"
-          />
-        </div>
-        <div formArrayName="subtasks">
-          @for (subtask of subtasks.controls; let i = $index; track $index) {
-          <div [formGroupName]="i" class="form-group">
-            <label for="subtaskName">Subtask Name</label>
+      <div class="form-group d-flex align-items-center pt-1">
+        <label for="dueDate" class="text-muted">Due Date</label>
+        <input
+          type="date"
+          class="form-control"
+          id="dueDate"
+          formControlName="dueDate"
+        />
+      </div>
+      <div formArrayName="subtasks" class="pt-3">
+        <span class="text-muted"> Subtasks:</span>
+        @for (subtask of subtasks.controls; let i = $index; track $index) {
+
+        <div [formGroupName]="i" class="input-group mb-2">
+          <div class="input-group-text">
             <input
-              type="text"
-              class="form-control"
-              id="subtaskName"
-              formControlName="name"
-            />
-            <label for="isCompleted">Completed</label>
-            <input
+              class="form-check-input mt-0"
               type="checkbox"
               id="isCompleted"
               formControlName="isCompleted"
             />
-            <button type="button" (click)="removeSubtask(i)">-</button>
           </div>
-          }
-        </div>
-        <div class="form-group">
-          <label for="categoryName">Category</label>
-          <select
+
+          <input
+            type="text"
             class="form-control"
-            id="category"
-            formControlName="categoryName"
+            id="subtaskName"
+            formControlName="name"
+            placeholder="Subtask Name"
+          />
+
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="removeSubtask(i)"
           >
-            @for (category of categories; track $index) {
-            <option [value]="category.name">
-              {{ category.name }}
-            </option>
-            }
-          </select>
+            <i class="bi bi-trash"></i>
+          </button>
         </div>
 
-        <button type="button" (click)="addSubtask()">+</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        }
+        <button
+          type="button"
+          class="btn btn-outline-secondary w-100 d-flex justify-content-between align-items-center add-subtask-btn"
+          (click)="addSubtask()"
+        >
+          Add new subtask
+          <i class="bi bi-plus"></i>
+        </button>
+      </div>
+      <div class="form-group d-flex align-items-center pt-3">
+        <label for="categoryName" class="text-muted">Category</label>
+        <select
+          class="form-control"
+          id="category"
+          formControlName="categoryName"
+        >
+          @for (category of categories; track $index) {
+          <option [value]="category.name">
+            {{ category.name }}
+          </option>
+          }
+        </select>
       </div>
     </div>
   </form>
-  <button
-    type="button"
-    class="btn btn-outline-dark"
-    (click)="activeModal.close('Close click')"
-  >
-    Schließen
-  </button>
+  <div class="modal-footer justify-content-between">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="activeModal.close('Close click')"
+    >
+      Close
+    </button>
+    <button (click)="onSubmit()" class="btn btn-primary">Save</button>
+  </div>
 </section>
