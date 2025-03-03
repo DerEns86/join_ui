@@ -7,7 +7,7 @@
         </button>
       </div>
       @for (contact of coloredContacts(); track $index) {
-      <div class="ps-2 m-3 bg-body-secondary mb-2 rounded">
+      <div class="ps-2 m-3 bg-body-secondary mb-2 rounded pointer">
         <div
           [routerLink]="['/contacts', contact.id]"
           class="d-flex align-items-center"
