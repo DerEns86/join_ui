@@ -1,5 +1,5 @@
-<div>
-  <div class="d-flex flex-wrap">
+<div class="ps-3 mt-3">
+  <div class="d-flex flex-wrap gap-3">
     <div style="width: 276px">
       <h3>To Do</h3>
       <div
@@ -17,8 +17,11 @@
       >
         @for (task of pending; track $index) {
         <div class="task card mb-2" cdkDrag (click)="openEditTaskModal(task)">
-          <div class="task-header text-white text-center fw-bold bg-info">
-            {{ task.categoryName }}
+          <div class="task-header d-flex justify-content-between mx-3 pt-2">
+            <div class="bg-info bg-opacity-75 fw-medium px-3 rounded-4">
+              {{ task.categoryName }}
+            </div>
+            <app-priority-icon [priority]="task.priority"></app-priority-icon>
           </div>
           <div class="card-body">
             <h5 class="card-title">{{ task.name }}</h5>
@@ -31,7 +34,7 @@
             <div>
               <div class="progress mt-2">
                 <div
-                  class="progress-bar bg-primary"
+                  class="progress-bar bg-primary opacity-75"
                   role="progressbar"
                   [style.width.%]="calculateProgress(subtasks)"
                   aria-valuenow="calculateProgress(subtasks)"
@@ -47,10 +50,6 @@
               </p>
             </div>
             } }
-          </div>
-
-          <div class="avatars mt-2">
-            <span class="avatar"> user.initials </span>
           </div>
         </div>
         }
@@ -74,8 +73,11 @@
       >
         @for (task of inProgress; track $index) {
         <div class="task card mb-2" cdkDrag (click)="openEditTaskModal(task)">
-          <div class="task-header text-white text-center fw-bold bg-info">
-            {{ task.categoryName }}
+          <div class="task-header d-flex justify-content-between mx-3 pt-2">
+            <div class="bg-info bg-opacity-75 fw-medium px-3 rounded-4">
+              {{ task.categoryName }}
+            </div>
+            <app-priority-icon [priority]="task.priority"></app-priority-icon>
           </div>
           <div class="card-body">
             <h5 class="card-title">{{ task.name }}</h5>
@@ -88,7 +90,7 @@
             <div>
               <div class="progress mt-2">
                 <div
-                  class="progress-bar bg-primary"
+                  class="progress-bar bg-primary opacity-75"
                   role="progressbar"
                   [style.width.%]="calculateProgress(subtasks)"
                   aria-valuenow="calculateProgress(subtasks)"
@@ -104,10 +106,6 @@
               </p>
             </div>
             }}
-          </div>
-
-          <div class="avatars mt-2">
-            <span class="avatar"> user.initials </span>
           </div>
         </div>
         }
@@ -127,8 +125,11 @@
       >
         @for (task of awaitingFeedback; track $index) {
         <div class="task card mb-2" cdkDrag (click)="openEditTaskModal(task)">
-          <div class="task-header text-white text-center fw-bold bg-info">
-            {{ task.categoryName }}
+          <div class="task-header d-flex justify-content-between mx-3 pt-2">
+            <div class="bg-info bg-opacity-75 fw-medium px-3 rounded-4">
+              {{ task.categoryName }}
+            </div>
+            <app-priority-icon [priority]="task.priority"></app-priority-icon>
           </div>
           <div class="card-body">
             <h5 class="card-title">{{ task.name }}</h5>
@@ -140,7 +141,7 @@
             (subtasks.length > 0) {
             <div class="progress mt-2">
               <div
-                class="progress-bar bg-primary"
+                class="progress-bar bg-primary opacity-75"
                 role="progressbar"
                 [style.width.%]="calculateProgress(subtasks)"
                 aria-valuenow="calculateProgress(subtasks)"
@@ -155,9 +156,6 @@
               Subtasks
             </p>
             }}
-            <div class="avatars mt-2">
-              <span class="avatar"> user.initials </span>
-            </div>
           </div>
         </div>
         }
@@ -181,8 +179,11 @@
       >
         @for (task of done; track $index) {
         <div class="task card mb-2" cdkDrag (click)="openEditTaskModal(task)">
-          <div class="task-header text-white text-center fw-bold bg-info">
-            {{ task.categoryName }}
+          <div class="task-header d-flex justify-content-between mx-3 pt-2">
+            <div class="bg-info bg-opacity-75 fw-medium px-3 rounded-4">
+              {{ task.categoryName }}
+            </div>
+            <app-priority-icon [priority]="task.priority"></app-priority-icon>
           </div>
           <div class="card-body">
             <h5 class="card-title">{{ task.name }}</h5>
@@ -194,7 +195,7 @@
             (subtasks.length > 0) {
             <div class="progress mt-2">
               <div
-                class="progress-bar bg-primary"
+                class="progress-bar bg-primary opacity-75"
                 role="progressbar"
                 [style.width.%]="calculateProgress(subtasks)"
                 aria-valuenow="calculateProgress(subtasks)"
@@ -209,9 +210,6 @@
               Subtasks
             </p>
             }}
-            <div class="avatars mt-2">
-              <span class="avatar"> user.initials </span>
-            </div>
           </div>
         </div>
         }

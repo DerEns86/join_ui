@@ -56,6 +56,10 @@ export class AddTaskComponent implements OnInit {
     return this.addTaskForm.get('subtasks') as FormArray;
   }
 
+  setPriority(priority: string) {
+    this.addTaskForm.patchValue({ priority });
+  }
+
   addSubtask() {
     this.subtasks.push(
       this.fb.group({

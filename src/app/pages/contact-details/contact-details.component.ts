@@ -9,11 +9,12 @@ import { ContactService } from '../../services/contact.service';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs';
 import { ContactInterface } from '../../models/contact.interface';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-contact-details',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './contact-details.component.html',
   styleUrl: './contact-details.component.scss',
 })
@@ -26,6 +27,10 @@ export class ContactDetailsComponent implements OnInit {
 
   contactId: number | undefined;
   contact = signal<ContactInterface | null>(null);
+  inEditMode = false;
+
+  initials = signal<string>('');
+  color = this.generateRandomColor();
 
   constructor() {
     this.contactForm = this.fb.group({
@@ -43,6 +48,7 @@ export class ContactDetailsComponent implements OnInit {
         .subscribe({
           next: (data) => {
             this.contact.set(data);
+            this.initials.set(this.getInitials(data.firstName, data.lastName));
             this.contactForm.setValue({
               firstName: data.firstName,
               lastName: data.lastName,
@@ -59,4 +65,16 @@ export class ContactDetailsComponent implements OnInit {
   }
 
   onSubmit() {}
+
+  getInitials(firstName: string, secondName: string) {
+    return firstName.charAt(0) + secondName.charAt(0);
+  }
+
+  generateRandomColor() {
+    return '#' + Math.floor(Math.random() * 16777215).toString(16);
+  }
+
+  deleteContact(contactId: number) {
+    this.contactService.deleteContact(contactId);
+  }
 }

@@ -110,7 +110,6 @@ export class DialogEditTaskComponent {
 
     this.taskService.updateTask(updatedTask).subscribe({
       next: (updatedTaskResponse) => {
-        console.log('Task updated:', updatedTaskResponse);
         const taskId = updatedTaskResponse.id;
 
         subtasks.forEach((subtask: SubtaskInterface) => {
@@ -142,11 +141,35 @@ export class DialogEditTaskComponent {
     return this.editTaskForm.get('subtasks') as FormArray;
   }
 
+  addSubtask() {
+    this.subtasks.push(
+      this.fb.group({
+        name: ['', Validators.required],
+        isCompleted: [false],
+      })
+    );
+  }
+
+  removeSubtask(index: number) {
+    const subtaskId = this.subtasks.at(index).get('id')?.value;
+    if (subtaskId) {
+      this.taskService.deleteSubtask(subtaskId).subscribe({
+        next: () => {
+          this.subtasks.removeAt(index);
+        },
+        error: (err) => {
+          console.error('Error deleting subtask:', err);
+        },
+      });
+    } else {
+      this.subtasks.removeAt(index);
+    }
+  }
+
   getCategories() {
     return this.categoryService.getCategories().subscribe({
       next: (data) => {
         this.categories = data;
-        console.log('Categories:', this.categories);
       },
     });
   }
