@@ -55,4 +55,25 @@ export class LoginComponent implements OnInit {
     }
     this.loginForm.reset();
   }
+
+  loginGuest() {
+    this.authService.loginGuest().subscribe({
+      next: (data: UserLoginInterface) => {
+        window.localStorage.setItem('token', data['jwtToken']);
+        window.localStorage.setItem('user', JSON.stringify(data));
+
+        this.authService.currentUserSignal.set(data);
+        console.log(this.authService.currentUserSignal());
+        this.router.navigateByUrl('');
+      },
+      error: (err) => {
+        console.error('Login failes', err.error.message);
+        this.errorMessages = err.error.message;
+        window.localStorage.removeItem('token');
+        window.localStorage.setItem('user', JSON.stringify(null));
+        this.authService.currentUserSignal.set(null);
+        console.warn(this.authService.currentUserSignal());
+      },
+    });
+  }
 }
