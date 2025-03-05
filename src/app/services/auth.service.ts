@@ -40,6 +40,13 @@ export class AuthService {
     );
   }
 
+  loginGuest(): Observable<UserLoginInterface> {
+    return this.http.post<UserLoginInterface>(
+      `${this.BASE_URL}api/auth/public/guest`,
+      {}
+    );
+  }
+
   fetchCurrentUser(): Observable<UserLoginInterface> {
     const token = window.localStorage.getItem('token');
 

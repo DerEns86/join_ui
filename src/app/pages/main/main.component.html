@@ -1,5 +1,5 @@
 <section>
-  <h3>Join 360 | Key Metrics at a Glance</h3>
+  <h3 class="ms-3 mt-3">Join 360 | Key Metrics at a Glance</h3>
 
   <div class="d-flex main-content">
     <div class="summary-content">
@@ -7,51 +7,64 @@
         <div class="col-6">
           <div class="card">
             <div class="card-text">
-              <span class="edit_png">
-                <svg
-                  width="25"
-                  height="25"
-                  viewBox="0 0 25 25"
-                  fill="white"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M3.0612 22.1418H4.92787L16.4279 10.6418L14.5612 8.7751L3.0612 20.2751V22.1418ZM22.1279 8.70843L16.4612 3.10843L18.3279 1.24176C18.839 0.730653 19.4668 0.475098 20.2112 0.475098C20.9556 0.475098 21.5834 0.730653 22.0945 1.24176L23.9612 3.10843C24.4723 3.61954 24.739 4.23621 24.7612 4.95843C24.7834 5.68065 24.539 6.29732 24.0279 6.80843L22.1279 8.70843ZM20.1945 10.6751L6.0612 24.8084H0.394531V19.1418L14.5279 5.00843L20.1945 10.6751Z"
-                    fill="#fffff"
-                  ></path>
-                </svg>
-              </span>
-              <h4>To-Do</h4>
-              @if (getNumberOfFilteredTasks(Status.PENDING) !== 0) {
-              <p>{{ getNumberOfFilteredTasks(Status.PENDING) }}</p>
-              }
+              <div class="svg-container">
+                <span>
+                  <svg
+                    class="svg-icon"
+                    width="25"
+                    height="25"
+                    viewBox="0 0 25 25"
+                    fill="white"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M3.0612 22.1418H4.92787L16.4279 10.6418L14.5612 8.7751L3.0612 20.2751V22.1418ZM22.1279 8.70843L16.4612 3.10843L18.3279 1.24176C18.839 0.730653 19.4668 0.475098 20.2112 0.475098C20.9556 0.475098 21.5834 0.730653 22.0945 1.24176L23.9612 3.10843C24.4723 3.61954 24.739 4.23621 24.7612 4.95843C24.7834 5.68065 24.539 6.29732 24.0279 6.80843L22.1279 8.70843ZM20.1945 10.6751L6.0612 24.8084H0.394531V19.1418L14.5279 5.00843L20.1945 10.6751Z"
+                    ></path>
+                  </svg>
+                </span>
+              </div>
+              <div class="status-content">
+                <span class="fw-semibold">To-Do</span>
+                @if (getNumberOfFilteredTasks(Status.PENDING) !== 0) {
+                <p class="fs-1 fw-bold">
+                  {{ getNumberOfFilteredTasks(Status.PENDING) }}
+                </p>
+                }
+              </div>
             </div>
           </div>
         </div>
         <div class="col-6">
           <div class="card">
             <div class="card-text">
-              <span class="edit_png_1">
-                <svg
-                  width="38"
-                  height="30"
-                  viewBox="0 0 38 30"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M3.92285 14.8085L15.1516 25.8745L33.8662 3.74243"
-                    stroke="white"
-                    stroke-width="7"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></path>
-                </svg>
-              </span>
-              <h4>Done</h4>
-              @if (getNumberOfFilteredTasks(Status.DONE) !== 0) {
-              <p>{{ getNumberOfFilteredTasks(Status.DONE) }}</p>
-              }
+              <div class="svg-container">
+                <span>
+                  <svg
+                    width="38"
+                    height="30"
+                    viewBox="0 0 38 30"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      class="svg-icon-test"
+                      d="M3.92285 14.8085L15.1516 25.8745L33.8662 3.74243"
+                      stroke="white"
+                      stroke-width="7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </span>
+              </div>
+              <div class="status-content">
+                <span class="fw-semibold">Done</span>
+                @if (getNumberOfFilteredTasks(Status.DONE) !== 0) {
+                <p class="fs-1 fw-bold">
+                  {{ getNumberOfFilteredTasks(Status.DONE) }}
+                </p>
+                }
+              </div>
             </div>
           </div>
         </div>
@@ -59,40 +72,58 @@
       <div class="row m-3">
         <div class="col-12">
           <div class="card d-flex">
-            <div>
-              <p>urgent</p>
-            </div>
-            <div>
-              <p>upcoming deadline</p>
+            <div class="urgent-content">
+              <div>
+                <div
+                  class="w-100 d-flex justify-content-center align-items-center"
+                >
+                  <img class="urgent-icon" src="urgent.png" alt="" />
+                  <div>
+                    <p class="w-100 fs-1 fw-bold">
+                      {{ getNumberOfUrgentTasks() }}
+                    </p>
+                    <p class="fw-semibold">Urgent</p>
+                  </div>
+                </div>
+              </div>
+              <div class="seperator"></div>
+              <div class="w-50 d-flex flex-column justify-content-center px-2">
+                <p class="w-100">upcoming deadline</p>
+                <p class="fw-semibold">{{ firstUrgentTaskDueDate }}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div class="row m-3">
         <div class="col-4">
-          <div class="card">
-            <div class="card-text">
-              <p>Tasks in Board</p>
-              <p>{{ getNumberOfAllTasks() }}</p>
+          <div class="card card-mobile">
+            <div class="card-text flex-column">
+              <p class="fw-semibold">Tasks in Board</p>
+              <p class="fw-bold fs-1">{{ getNumberOfAllTasks() }}</p>
             </div>
           </div>
         </div>
         <div class="col-4">
-          <div class="card">
-            <div class="card-text">
-              <p>Tasks in Progress</p>
+          <div class="card card-mobile">
+            <div class="card-text flex-column">
+              <p class="fw-semibold">Tasks in Progress</p>
               @if (getNumberOfFilteredTasks(Status.IN_PROGRESS) !== 0) {
-              <p>{{ getNumberOfFilteredTasks(Status.IN_PROGRESS) }}</p>
+              <p class="fw-bold fs-1">
+                {{ getNumberOfFilteredTasks(Status.IN_PROGRESS) }}
+              </p>
               }
             </div>
           </div>
         </div>
         <div class="col-4">
-          <div class="card">
-            <div class="card-text">
-              <p>Awaiting Feedback</p>
+          <div class="card card-mobile">
+            <div class="card-text flex-column">
+              <p class="fw-semibold">Awaiting Feedback</p>
               @if (getNumberOfFilteredTasks(Status.AWAITING_FEEDBACK) !== 0) {
-              <p>{{ getNumberOfFilteredTasks(Status.AWAITING_FEEDBACK) }}</p>
+              <p class="fw-bold fs-1">
+                {{ getNumberOfFilteredTasks(Status.AWAITING_FEEDBACK) }}
+              </p>
               }
             </div>
           </div>
@@ -100,15 +131,7 @@
       </div>
     </div>
     <div class="greeting">
-      <p>Good mornig, {{ username }}!</p>
+      <p class="fs-1 fw-semibold">Good mornig, {{ username }}!</p>
     </div>
   </div>
 </section>
-
-<!-- <div>
-  @for(task of tasks ; track $index){
-  <p>{{ task.name }}</p>
-  <p>{{ task.status }}</p>
-  <p>{{ task.priority }}</p>
-  }
-</div> -->

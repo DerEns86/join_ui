@@ -1,10 +1,10 @@
 <section>
-  <p class="fs-1">Add Task</p>
+  <p class="fs-1 fw-semibold ms-3 mt-3">Add Task</p>
 
-  <div>
+  <div class="content">
     <form [formGroup]="addTaskForm">
       <div
-        class="w-100 wrapper d-flex justify-content-around"
+        class="w-100 wrapper d-flex justify-content-between"
         [ngClass]="{ mobile: breakpointService.isMobileView }"
       >
         <div class="col-md-5">
@@ -16,6 +16,12 @@
               id="name"
               formControlName="name"
             />
+            @if (addTaskForm.get('name')?.invalid &&
+            (addTaskForm.get('name')?.dirty ||
+            addTaskForm.get('name')?.touched)) { @if
+            (addTaskForm.get('name')?.errors?.['required']) {
+            <div class="text-danger small">Name is required</div>
+            } }
           </div>
           <div class="form-group">
             <label for="description">Description</label>
@@ -132,6 +138,12 @@
               id="dueDate"
               formControlName="dueDate"
             />
+            @if (addTaskForm.get('dueDate')?.invalid &&
+            (addTaskForm.get('dueDate')?.dirty ||
+            addTaskForm.get('dueDate')?.touched)) { @if
+            (addTaskForm.get('dueDate')?.errors?.['required']) {
+            <div class="text-danger small">Due Date is required</div>
+            } }
           </div>
           <div formArrayName="subtasks" class="mt-2">
             @for (subtask of subtasks.controls; let i = $index; track $index) {
@@ -174,12 +186,24 @@
               </option>
               }
             </select>
+            @if (addTaskForm.get('categoryName')?.invalid &&
+            (addTaskForm.get('categoryName')?.dirty ||
+            addTaskForm.get('categoryName')?.touched)) { @if
+            (addTaskForm.get('categoryName')?.errors?.['required']) {
+            <div class="text-danger small">Select a category</div>
+            } }
           </div>
         </div>
       </div>
     </form>
-    <div class="w-100 d-flex justify-content-end pe-4 mt-3">
-      <button (click)="onSubmit()" class="btn btn-primary">Submit</button>
+    <div class="w-100 d-flex justify-content-end mt-3">
+      <button
+        (click)="onSubmit()"
+        class="btn btn-primary"
+        [disabled]="addTaskForm.invalid"
+      >
+        Submit
+      </button>
     </div>
   </div>
 </section>

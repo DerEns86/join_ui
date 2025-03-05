@@ -21,7 +21,7 @@ export class HeaderComponent {
       const currentUser: UserLoginInterface = JSON.parse(
         window.localStorage.getItem('user') || '{}'
       );
-      return currentUser.username.charAt(0);
+      return currentUser.username.charAt(0).toUpperCase();
     } else {
       return '';
     }

@@ -30,11 +30,11 @@ export class AddTaskComponent implements OnInit {
 
   addTaskForm: FormGroup = this.fb.group({
     name: ['', Validators.required],
-    description: ['', Validators.required],
+    description: [''],
     priority: ['MEDIUM'],
     dueDate: ['', Validators.required],
     subtasks: this.fb.array([]),
-    categoryName: [''],
+    categoryName: ['', Validators.required],
   });
 
   ngOnInit(): void {
@@ -77,7 +77,6 @@ export class AddTaskComponent implements OnInit {
     return this.categoryService.getCategories().subscribe({
       next: (data) => {
         this.categories = data;
-        console.log('Categories:', this.categories);
       },
     });
   }
