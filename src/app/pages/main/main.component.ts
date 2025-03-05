@@ -66,4 +66,11 @@ export class MainComponent implements OnInit, OnDestroy {
 
     return filteredTasks.length;
   }
+
+  getNumberOfUrgentTasks() {
+    const tasks = this.tasks;
+    let filteredTasks = tasks.filter((task) => task.priority === 'URGENT');
+
+    return filteredTasks.length;
+  }
 }
