@@ -23,7 +23,7 @@
       (contactForm.get('firstName')?.dirty ||
       contactForm.get('firstName')?.touched)) { @if
       (contactForm.get('firstName')?.errors?.['required']) {
-      <div class="text-danger">First Name is required</div>
+      <div class="text-danger small">First Name is required</div>
       } }
     </div>
 
@@ -39,7 +39,7 @@
       (contactForm.get('lastName')?.dirty ||
       contactForm.get('lastName')?.touched)) { @if
       (contactForm.get('lastName')?.errors?.['required']) {
-      <div class="text-danger">Last Name is required</div>
+      <div class="text-danger small">Last Name is required</div>
       } }
     </div>
 
@@ -54,9 +54,9 @@
       @if (contactForm.get('email')?.invalid && (contactForm.get('email')?.dirty
       || contactForm.get('email')?.touched)) { @if
       (contactForm.get('email')?.errors?.['required']) {
-      <div class="text-danger">E-Mail is required</div>
+      <div class="text-danger small">E-Mail is required</div>
       } @if (contactForm.get('email')?.errors?.['email']) {
-      <div class="text-danger">Email is not valid</div>
+      <div class="text-danger small">Email is not valid</div>
       } }
     </div>
 
@@ -71,7 +71,7 @@
       @if (contactForm.get('phone')?.invalid && (contactForm.get('phone')?.dirty
       || contactForm.get('phone')?.touched)) { @if
       (contactForm.get('phone')?.errors?.['required']) {
-      <div class="text-danger">Telefonnummer is required</div>
+      <div class="text-danger small">A phone number is required</div>
       } }
     </div>
   </form>
