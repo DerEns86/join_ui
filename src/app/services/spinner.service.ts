@@ -21,7 +21,6 @@ export class SpinnerService {
 
   hideSpinner(): void {
     this.requestCount--;
-    console.log('requestCount:', this.requestCount);
 
     if (this.requestCount <= 0) {
       this.requestCount = 0;

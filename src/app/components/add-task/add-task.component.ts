@@ -77,7 +77,6 @@ export class AddTaskComponent implements OnInit {
     return this.categoryService.getCategories().subscribe({
       next: (data) => {
         this.categories = data;
-        console.log('Categories:', this.categories);
       },
     });
   }
