@@ -3,6 +3,10 @@
   resize: none;
 }
 
+.content {
+  padding-inline: 2.5rem;
+}
+
 .mobile {
   flex-direction: column;
 }
@@ -32,4 +36,10 @@
 
 .add-subtask-btn {
   height: 48px;
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    padding-inline: 0.5rem;
+  }
 }

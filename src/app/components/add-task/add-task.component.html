@@ -1,10 +1,10 @@
 <section>
-  <p class="fs-1">Add Task</p>
+  <p class="fs-1 fw-semibold ms-3 mt-3">Add Task</p>
 
-  <div>
+  <div class="content">
     <form [formGroup]="addTaskForm">
       <div
-        class="w-100 wrapper d-flex justify-content-around"
+        class="w-100 wrapper d-flex justify-content-between"
         [ngClass]="{ mobile: breakpointService.isMobileView }"
       >
         <div class="col-md-5">
@@ -178,7 +178,7 @@
         </div>
       </div>
     </form>
-    <div class="w-100 d-flex justify-content-end pe-4 mt-3">
+    <div class="w-100 d-flex justify-content-end mt-3">
       <button (click)="onSubmit()" class="btn btn-primary">Submit</button>
     </div>
   </div>
