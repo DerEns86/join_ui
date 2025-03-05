@@ -11,15 +11,115 @@
   border-radius: 20px;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   transition: all 0.7s ease;
+
+  .card-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      margin-block-end: 0;
+    }
+  }
+
   &:hover {
     scale: 1.05;
     background-color: #2a3647;
     color: #fff;
+  }
+
+  &:hover .svg-icon {
+    fill: #2a3647;
+  }
+  &:hover .svg-icon-test {
+    stroke: #2a3647;
+  }
+
+  &:hover .svg-container {
+    background-color: #fff;
+  }
+}
+
+.urgent-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  p {
+    margin-block-end: 0;
+  }
+
+  :first-child {
+    width: 50%;
+  }
+
+  .seperator {
+    width: 2px;
+    background-color: grey;
+    height: 100%;
+  }
+
+  .urgent-icon {
+    width: 3.75rem;
+    height: 3.75rem;
+    margin-right: 1.5rem;
+  }
+}
+
+.svg-container {
+  width: 4.325rem;
+  height: 4.325rem;
+  background-color: #2a3647;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-content {
+  margin-left: 0.5rem;
+  p {
+    margin-block-end: 0;
   }
 }
 
 @media screen and (max-width: 768px) {
   .main-content {
     flex-direction: column;
+  }
+
+  .card-mobile {
+    height: 110px !important;
+    p {
+      margin-block-end: 0;
+    }
+    .card-text {
+      :first-child {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .card-text {
+    flex-direction: column;
+  }
+
+  .status-content {
+    margin-top: 0.5rem;
+    margin-left: 0;
+  }
+
+  .svg-container {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .urgent-icon {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    margin-right: 0.5rem !important;
+  }
+
+  .greeting {
+    text-align: center;
   }
 }

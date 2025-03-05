@@ -25,6 +25,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   tasks: TaskInterface[] = [];
   numberOfTasksInProgress = new BehaviorSubject<number>(0);
+  firstUrgentTaskDueDate: string = '';
 
   constructor() {}
 
@@ -32,8 +33,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.taskService.tasks$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (data) => {
         this.tasks = data;
-        // this.updateNumberOfTasksInProgress();
-        console.log('tasks: ', this.tasks);
+        this.firstUrgentTaskDueDate = this.getFirstUrgentTask(data);
       },
     });
   }
@@ -72,5 +72,12 @@ export class MainComponent implements OnInit, OnDestroy {
     let filteredTasks = tasks.filter((task) => task.priority === 'URGENT');
 
     return filteredTasks.length;
+  }
+
+  getFirstUrgentTask(tasks: TaskInterface[]) {
+    let urgentTasks = tasks.filter((task) => task.priority === 'URGENT');
+    return urgentTasks.length > 0
+      ? new Date(urgentTasks[0].dueDate).toLocaleDateString()
+      : '';
   }
 }
