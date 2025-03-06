@@ -130,6 +130,7 @@ export class DialogEditTaskComponent {
         });
 
         this.taskService.loadTasks();
+        this.activeModal.close();
       },
       error: (err) => {
         console.error('Error updating task:', err);
