@@ -30,27 +30,28 @@
               {{ task.description }}
             </p>
 
-            @if (subtasksMap[task.id] | async; as subtasks) { @if
-            (subtasks.length > 0) {
+            <!-- @if (subtasksMap[task.id] | async; as subtasks) { @if
+            (subtasks.length > 0) { -->
+            @if (task.subtasks.length > 0) {
             <div>
               <div class="progress mt-2">
                 <div
                   class="progress-bar bg-primary opacity-75"
                   role="progressbar"
-                  [style.width.%]="calculateProgress(subtasks)"
+                  [style.width.%]="calculateProgress(task.subtasks)"
                   aria-valuenow="calculateProgress(subtasks)"
                   aria-valuemin="0"
                   aria-valuemax="100"
                 ></div>
               </div>
               <p class="small mt-1">
-                {{ getCompletedSubtasks(subtasks) }}/{{
-                  getTotalSubtasks(subtasks)
+                {{ getCompletedSubtasks(task.subtasks) }}/{{
+                  getTotalSubtasks(task.subtasks)
                 }}
                 Subtasks
               </p>
             </div>
-            } }
+            }
           </div>
         </div>
         }
@@ -86,27 +87,28 @@
               {{ task.description }}
             </p>
 
-            @if (subtasksMap[task.id] | async; as subtasks) { @if
-            (subtasks.length > 0) {
+            <!-- @if (subtasksMap[task.id] | async; as subtasks) { @if
+            (subtasks.length > 0) { -->
+            @if (task.subtasks.length > 0) {
             <div>
               <div class="progress mt-2">
                 <div
                   class="progress-bar bg-primary opacity-75"
                   role="progressbar"
-                  [style.width.%]="calculateProgress(subtasks)"
+                  [style.width.%]="calculateProgress(task.subtasks)"
                   aria-valuenow="calculateProgress(subtasks)"
                   aria-valuemin="0"
                   aria-valuemax="100"
                 ></div>
               </div>
               <p class="small mt-1">
-                {{ getCompletedSubtasks(subtasks) }}/{{
-                  getTotalSubtasks(subtasks)
+                {{ getCompletedSubtasks(task.subtasks) }}/{{
+                  getTotalSubtasks(task.subtasks)
                 }}
                 Subtasks
               </p>
             </div>
-            }}
+            }
           </div>
         </div>
         }
@@ -138,25 +140,26 @@
               {{ task.description }}
             </p>
 
-            @if (subtasksMap[task.id] | async; as subtasks) { @if
-            (subtasks.length > 0) {
+            <!-- @if (subtasksMap[task.id] | async; as subtasks) { @if
+            (subtasks.length > 0) { -->
+            @if (task.subtasks.length > 0) {
             <div class="progress mt-2">
               <div
                 class="progress-bar bg-primary opacity-75"
                 role="progressbar"
-                [style.width.%]="calculateProgress(subtasks)"
+                [style.width.%]="calculateProgress(task.subtasks)"
                 aria-valuenow="calculateProgress(subtasks)"
                 aria-valuemin="0"
                 aria-valuemax="100"
               ></div>
             </div>
             <p class="small mt-1">
-              {{ getCompletedSubtasks(subtasks) }}/{{
-                getTotalSubtasks(subtasks)
+              {{ getCompletedSubtasks(task.subtasks) }}/{{
+                getTotalSubtasks(task.subtasks)
               }}
               Subtasks
             </p>
-            }}
+            }
           </div>
         </div>
         }
@@ -192,25 +195,26 @@
               {{ task.description }}
             </p>
 
-            @if (subtasksMap[task.id] | async; as subtasks) { @if
-            (subtasks.length > 0) {
+            <!-- @if (subtasksMap[task.id] | async; as subtasks) { @if
+            (subtasks.length > 0) { -->
+            @if (task.subtasks.length > 0) {
             <div class="progress mt-2">
               <div
                 class="progress-bar bg-primary opacity-75"
                 role="progressbar"
-                [style.width.%]="calculateProgress(subtasks)"
+                [style.width.%]="calculateProgress(task.subtasks)"
                 aria-valuenow="calculateProgress(subtasks)"
                 aria-valuemin="0"
                 aria-valuemax="100"
               ></div>
             </div>
             <p class="small mt-1">
-              {{ getCompletedSubtasks(subtasks) }}/{{
-                getTotalSubtasks(subtasks)
+              {{ getCompletedSubtasks(task.subtasks) }}/{{
+                getTotalSubtasks(task.subtasks)
               }}
               Subtasks
             </p>
-            }}
+            }
           </div>
         </div>
         }

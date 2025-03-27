@@ -65,8 +65,6 @@ export class BoardComponent implements OnInit {
             Status[task.status as unknown as keyof typeof Status] ===
             Status.DONE
         );
-
-        this.tasks.forEach((task) => this.loadSubtasks(task.id));
       },
     });
   }
@@ -117,15 +115,6 @@ export class BoardComponent implements OnInit {
         },
       });
     }
-  }
-
-  loadSubtasks(taskId: string): void {
-    this.subtasksMap[taskId] = this.taskService.getSubtasks(taskId).pipe(
-      catchError((err) => {
-        console.error(`Error fetching subtask for task ${taskId}:`, err);
-        return of([]);
-      })
-    );
   }
 
   calculateProgress(subtasks: SubtaskInterface[]): number {
