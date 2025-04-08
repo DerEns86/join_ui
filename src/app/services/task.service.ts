@@ -12,6 +12,7 @@ import {
   takeUntil,
   tap,
 } from 'rxjs';
+import { TaskRequestInterface } from '../models/taskRequest.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -46,16 +47,14 @@ export class TaskService implements OnDestroy {
       });
   }
 
-  addTask(task: TaskInterface): Observable<string> {
-    return this.http
-      .post<TaskInterface>(`${this.BASE_URL}api/tasks`, task)
-      .pipe(
-        switchMap((data) => {
-          console.log(data);
-          console.log('TaskId:', data.id);
-          return [data.id];
-        })
-      );
+  createTask(task: TaskRequestInterface) {
+    this.http
+      .post<TaskRequestInterface>(`${this.BASE_URL}api/tasks`, task)
+      .subscribe({
+        next: (task) => {
+          console.log(task);
+        },
+      });
   }
 
   addSubtask(
@@ -66,30 +65,6 @@ export class TaskService implements OnDestroy {
       `${this.BASE_URL}api/tasks/${taskId}/subtask`,
       subtask
     );
-  }
-
-  addTaskWithSubtasks(task: TaskInterface, subtasks: SubtaskInterface[]) {
-    this.addTask(task)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (taskId) => {
-          subtasks.forEach((subtask) => {
-            this.addSubtask(taskId, subtask)
-              .pipe(takeUntil(this.destroy$))
-              .subscribe({
-                next: (data) => {
-                  console.log('Subtask added:', data);
-                },
-                error: (err) => {
-                  console.error('Error adding subtask:', err);
-                },
-              });
-          });
-        },
-        error: (err) => {
-          console.error('Error adding task:', err);
-        },
-      });
   }
 
   updateTaskStatus(taskId: string, status: string): Observable<TaskInterface> {

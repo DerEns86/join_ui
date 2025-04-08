@@ -42,14 +42,10 @@ export class AddTaskComponent implements OnInit {
   }
 
   onSubmit() {
-    const { subtasks, categoryName, ...taskData } = this.addTaskForm.value;
+    console.log(this.addTaskForm.value);
+    const task = { ...this.addTaskForm.value, status: 'PENDING' };
 
-    const task: TaskInterface = {
-      ...taskData,
-      category: categoryName ? { name: categoryName } : null,
-    };
-
-    this.taskService.addTaskWithSubtasks(task, subtasks);
+    this.taskService.createTask(task);
   }
 
   get subtasks(): FormArray {
