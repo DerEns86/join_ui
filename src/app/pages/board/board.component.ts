@@ -45,26 +45,14 @@ export class BoardComponent implements OnInit {
     this.taskService.tasks$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (data) => {
         this.tasks = data;
-        this.pending = this.tasks.filter(
-          (task) =>
-            Status[task.status as unknown as keyof typeof Status] ===
-            Status.PENDING
-        );
+        this.pending = this.tasks.filter((task) => task.status === 'PENDING');
         this.inProgress = this.tasks.filter(
-          (task) =>
-            Status[task.status as unknown as keyof typeof Status] ===
-            Status.IN_PROGRESS
+          (task) => task.status === 'IN_PROGRESS'
         );
         this.awaitingFeedback = this.tasks.filter(
-          (task) =>
-            Status[task.status as unknown as keyof typeof Status] ===
-            Status.AWAITING_FEEDBACK
+          (task) => task.status === 'AWAITING_FEEDBACK'
         );
-        this.done = this.tasks.filter(
-          (task) =>
-            Status[task.status as unknown as keyof typeof Status] ===
-            Status.DONE
-        );
+        this.done = this.tasks.filter((task) => task.status === 'DONE');
       },
     });
   }
