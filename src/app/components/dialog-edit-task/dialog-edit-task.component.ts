@@ -15,6 +15,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { SubtaskInterface } from '../../models/subtask.interface';
 import { catchError, Observable, of } from 'rxjs';
+import { TaskRequestInterface } from '../../models/taskRequest.interface';
 
 @Component({
   selector: 'app-dialog-edit-task',
@@ -93,36 +94,30 @@ export class DialogEditTaskComponent {
   }
 
   onSubmit() {
-    const { subtasks, categoryName, ...taskData } = this.editTaskForm.value;
+    const { subtasks, status, ...taskData } = this.editTaskForm.value;
 
-    const updatedTask: any = {
+    const updatedTask: TaskInterface = {
       ...this.task,
       ...taskData,
-      category: {
-        name: categoryName,
-      },
-      subtasks: subtasks.map((subtask: SubtaskInterface) => ({
-        id: subtask.id,
-        name: subtask.name,
-        isCompleted: subtask.isCompleted,
-      })),
+      status: this.task.status,
+      subtasks: [],
     };
 
-    this.taskService.updateTask(updatedTask).subscribe({
-      next: (updatedTaskResponse) => {
-        const taskId = updatedTaskResponse.id;
+    this.taskService.updateTask(this.task.id, updatedTask).subscribe({
+      next: (updatedTask) => {
+        console.log('Task updated:', updatedTask);
 
         subtasks.forEach((subtask: SubtaskInterface) => {
           if (subtask.id) {
             this.taskService
-              .updateSubtask(taskId, subtask.id, subtask)
+              .updateSubtask(this.task.id, subtask.id, subtask)
               .subscribe({
                 next: (updatedSubtask) =>
                   console.log('Subtask updated:', updatedSubtask),
                 error: (err) => console.error('Error updating subtask:', err),
               });
           } else {
-            this.taskService.addSubtask(taskId, subtask).subscribe({
+            this.taskService.addSubtask(this.task.id, subtask).subscribe({
               next: (newSubtask) => console.log('Subtask added:', newSubtask),
               error: (err) => console.error('Error adding subtask:', err),
             });

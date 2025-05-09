@@ -74,10 +74,26 @@ export class TaskService implements OnDestroy {
     );
   }
 
-  updateTask(task: TaskInterface): Observable<TaskInterface> {
-    return this.http
-      .put<TaskInterface>(`${this.BASE_URL}api/tasks/${task.id}`, task)
-      .pipe(tap(() => this.loadTasks()));
+  updateTask(
+    taskId: string,
+    task: TaskInterface
+  ): Observable<TaskRequestInterface> {
+    const updatedTask: TaskRequestInterface = {
+      name: task.name,
+      description: task.description,
+      status: task.status,
+      priority: task.priority,
+      dueDate: task.dueDate,
+      subtasks: [],
+      categoryName: task.categoryName,
+    };
+    console.log(task.id);
+
+    return this.http.put<TaskRequestInterface>(
+      `${this.BASE_URL}api/tasks/${taskId}`,
+      updatedTask
+    );
+    // .pipe(tap(() => this.loadTasks()));
   }
 
   updateSubtask(
