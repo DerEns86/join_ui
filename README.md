@@ -1,8 +1,30 @@
-# JoinUi
+# JoinUI
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9.
+**Join** is a Kanban-style project management tool built with **Angular**. It enables teams to efficiently manage tasks and projects using the Kanban methodology. Key features include task creation, prioritization, and tracking — all within a responsive and reactive user interface.
 
-## Create Environments
+> ⚠️ **Note:** This frontend application requires the backend service **[JoinAPI](https://github.com/DerEns86/join_api)**. Make sure the backend is up and running before starting the frontend.
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version **18.2.9**.
+
+---
+
+## 📥 Getting Started
+
+Follow these steps to clone the repository and set up the project locally:
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/DerEns86/join_ui.git
+cd join_ui
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Create Environments
 
 To create different environments for your Angular application, follow these steps:
 
